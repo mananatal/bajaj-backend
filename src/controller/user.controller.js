@@ -1,4 +1,5 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
+import mime from 'mime-types';
 
 const isPrime = (num) => {
     if (num <= 1){
@@ -36,11 +37,13 @@ const postMethod=asyncHandler(async (req,res)=>{
 
     if (file_b64) { 
         try {
-            const buffer = Buffer.from(file, 'base64');
-            fileMimeType = require('mime-types').lookup(buffer);
+            const buffer = Buffer.from(file_b64, 'base64');
+            fileMimeType = mime.lookup(file_b64.slice(0, 4)) || 'unknown';
+            console.log(fileMimeType)
             fileSize = (buffer.length / 1024).toFixed(2);
             isFileValid = !!fileMimeType;
         } catch (error) {
+            console.log(error)
             isFileValid = false;
         }
     }
