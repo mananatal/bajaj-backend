@@ -20,7 +20,7 @@ import userRouter from "./routes/user.route.js";
 
 
 // //declaring routes
-app.use("/bhfl",userRouter);
+app.use("/bfhl",userRouter);
 
 
 export {app}
